@@ -1,5 +1,105 @@
 # Changelog
 
+## 1.0.0 (2025-12-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* **useClock:** No longer provides the tick constants (DAYS, HOURS, etc), use the date-fns comparison functions.
+* **useTimeout:** `timer.isActive` is now a read-only boolean instead of a getter function.
+* **useInterval:** `timer.isActive` is now a read-only boolean instead of a getter function.
+* **useDerivedState:** Now resets its value immediately when dependencies change, instead of waiting for next effect loop. This ensures that outgoing state is always in sync with incoming state.
+* **hooks/useTimers:** This file has now been separated into its constituent imports.
+* **usePageHash:** Actually returns the hash now, instead of a object.
+* **usePropsMemo:** This functionality is now incorporated into useStableMemo
+* **useWillUnmount:** Use useMountEffect instead.
+* **useChildren:** Replaced with useMemoChildren
+* Delete the root export. All hooks should be imported directly from their own imports
+* Deleted all mobx hooks.
+* **useAsyncCallback:** Now throws caught errors up the component tree
+
+### removed
+
+* **useClock:** No longer provides the tick constants (DAYS, HOURS, etc), use the date-fns comparison functions. ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+
+
+### Removed
+
+* **hooks/useTimers:** This file has now been separated into its constituent imports. ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useChildren:** Replaced with useMemoChildren ([f66a2a7](https://github.com/jimmorrison-coder/hooks/commit/f66a2a7f325472a53e199bc2fa3a32ab984f8417))
+* **usePropsMemo:** This functionality is now incorporated into useStableMemo ([f66a2a7](https://github.com/jimmorrison-coder/hooks/commit/f66a2a7f325472a53e199bc2fa3a32ab984f8417))
+* **useWillUnmount:** Use useMountEffect instead. ([f66a2a7](https://github.com/jimmorrison-coder/hooks/commit/f66a2a7f325472a53e199bc2fa3a32ab984f8417))
+
+
+### breaking
+
+* Delete the root export. All hooks should be imported directly from their own imports ([3ad908d](https://github.com/jimmorrison-coder/hooks/commit/3ad908d75f6a3ba28371e78e432dd682eb196b28))
+* Deleted all mobx hooks. ([596f00e](https://github.com/jimmorrison-coder/hooks/commit/596f00ee9beaf24534b1d89f174468fa9e37f2f6))
+
+
+### Features
+
+* Added a base export ([c064a6f](https://github.com/jimmorrison-coder/hooks/commit/c064a6fffbbc3d112fb8a262756012f3bfd82542))
+* All new typescript definitions for vscode completion. ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **SelectionContext:** Context provider for managing a value selections across nested components. ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **StatedContext:** Context provider for managing state across nested components. ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useAsyncCallback:** New hook to handle errors coming out of an async callback function ([f344f1b](https://github.com/jimmorrison-coder/hooks/commit/f344f1bb9ced957f25da0b3b30b7ca15d387d0ae))
+* **useAsyncCallback:** Now throws caught errors up the component tree ([a5fe63b](https://github.com/jimmorrison-coder/hooks/commit/a5fe63b662c3e08baaf4ba25533ef37ae15d130e))
+* **useAsyncEffect:** New hook for running async effect functions ([628e5da](https://github.com/jimmorrison-coder/hooks/commit/628e5da8d3fac21056710524b3dae1c84c55c54b))
+* **useChanged:** New hook for identifying when dependencies have been modified. ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useChildren:** Now supports a third argument for options, with a comparison option. ([1abb59b](https://github.com/jimmorrison-coder/hooks/commit/1abb59b382b7915be524e1728f67f800d6ad4871))
+* **useDebouncedEffect:** Can now accept anything for its dependencies. ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useDebouncedEffect:** Now accepts a dependency comparison option on the fifth argument. ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useDeferredUpdate:** New hook that generates an update callback that is guaranteed to never cause a state change during render. ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useElementInViewport:** New hook to check if an element is visible within a viewport. ([27feb83](https://github.com/jimmorrison-coder/hooks/commit/27feb836fb9699ce3512308c173b72461066213d))
+* **useGettableState:** Added the `defer` option to the setter function, and corrusponding `alwaysDefer` option to the hook invocation. This controls if calling the setter should immediately trigger setState, or defer to the next cycle of the event loop. Setting to true allows for writes during the render function without triggering a “State change during render” error. ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useGettableState:** Added the `immedate` option to the setter function, and corrusponding `alwaysImmediate` option to the hook invocation. This controls if the state update should happen when the setter is called, or if it should wait for rerender. ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useImmediateEffect:** Now accepts a dependency comparison option on the third argument. ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useIntervalUpdate:** New hook for triggering a component refreshes every N milliseconds since last update. ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useLocalStorage:** Now accepts a third argument for options. ([ebf86f4](https://github.com/jimmorrison-coder/hooks/commit/ebf86f465ae5035d941a329f8800955761b7207e))
+* **useLocalStorage:** Now has an `isJSON` option to disable json parsing/serializing of stored values. Defaults to true. ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useMemoObject:** Added options object to pass through to useStableMemo, giving means of changing comparison function ([54fdcc7](https://github.com/jimmorrison-coder/hooks/commit/54fdcc79dddf718e7c4c599e96670d76f525e862))
+* **useMountEffect:** New strict-mode safe hook for executing effects only on mount and dismount. ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useScrollToElement:** Smoothly tweens the page scroll until the target element is in view. ([2bd580e](https://github.com/jimmorrison-coder/hooks/commit/2bd580ee1ebf62899800d890d26d7bef748a7753))
+* **useSessionStorage:** Now has an `isJSON` option to disable json parsing/serializing of stored values. Defaults to true. ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useSmartEffect:** New hook. Identical to useEffect, but can use anything as a dependency and performs deep comparison of dependencies by default. ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useSuspense:** New hook for performing an async task across a react suspension. ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useUpdateEffect:** Can now accept anything for its dependencies. ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useUpdateEffect:** Now accepts a dependency comparison option on the third argument. ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useViewportIsIdle:** New hook for tracking if the user is inactive. ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+
+
+### Bug Fixes
+
+* Bump @twipped/utils to 7.0.0 ([1da909a](https://github.com/jimmorrison-coder/hooks/commit/1da909af4638bc33cdc28f9ef3fabc5dbbb23174))
+* Clean up duplicate imports ([5085fa7](https://github.com/jimmorrison-coder/hooks/commit/5085fa7ee5bfce06caef88e71cbd0a4d090d11e5))
+* Corrected a whole host of broken includes. ([5149dd2](https://github.com/jimmorrison-coder/hooks/commit/5149dd2984953d482f8f596b17a7ace9e240f685))
+* Fixed a whole bunch of little bugs caught by react-hooks linter ([49f46ba](https://github.com/jimmorrison-coder/hooks/commit/49f46bad743f0e640b9af7f252d79d81f6939a2c))
+* Hopefully corrected typescript exports ([35bdb6c](https://github.com/jimmorrison-coder/hooks/commit/35bdb6c1c781a21b5635b6311a7b2dd7eb22f968))
+* Removed the bad import from index.js ([2f5ca79](https://github.com/jimmorrison-coder/hooks/commit/2f5ca792cd93807da625446b516be74860088d5f))
+* **useClock:** No longer incorrectly triggers an update immediately after first render. ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useClock:** Now functions properly in StrictMode ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useComputed:** Now uses shallowEqual by default, as the docs say. ([2054707](https://github.com/jimmorrison-coder/hooks/commit/20547071e4008ba7465c0d08dc9d3166cad41940))
+* **useDebounce:** Now functions properly in StrictMode ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useDefer:** Fixed a bug that would cause the timeout handle to get lost on component refresh ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useDerivedState:** Now resets its value immediately when dependencies change, instead of waiting for next effect loop. This ensures that outgoing state is always in sync with incoming state. ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useGettableState:** Now supports passing a callback to the setter function, same as the native useState. ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useGettableState:** The getter and setter functions will no longer change every render if the initial value is an object or array. ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useInterval:** `timer.isActive` is now a read-only boolean instead of a getter function. ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useInterval:** Now functions properly in StrictMode ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useLazyRef:** Fixed incorrect loading of DEFAULT from @twipped/utils ([5664e54](https://github.com/jimmorrison-coder/hooks/commit/5664e5427390544edd198def5bc7637554b1dd71))
+* **useMemoObject:** Now accepts anything as a dependency. ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **usePageHash:** Actually returns the hash now, instead of a object. ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useStableMemo:** Now correctly detects a dependency change if `dependencies` becomes a falsy value. ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useStableMemo:** Use shallowEqual for default comparison, as the docs say. ([d3d3178](https://github.com/jimmorrison-coder/hooks/commit/d3d31782fb26b05809c4b4df1e8777d4d9f60a01))
+* **useTimeout:** `timer.isActive` is now a read-only boolean instead of a getter function. ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useTimeout:** Fixed a bug that would cause the timeout handle to get lost on component refresh ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useTimeout:** Now functions properly in StrictMode ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useTimeout:** When the timeout function is provided on the hook instead of the `set()` function, the timeout will now always invoke the latest rendered instance of the function. Previously it would render the instance at the time set() was called. ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useToggledState:** Fixed the state just never changing from its default ([35136c6](https://github.com/jimmorrison-coder/hooks/commit/35136c6fe3a7f5e82d8e102b85e97f9125ed6fe6))
+* **useUpdateEffect:** Now functions properly in StrictMode ([e7443d6](https://github.com/jimmorrison-coder/hooks/commit/e7443d6cd067960b3c70ac0f5b985bef98823c2c))
+* **useWhenElementRefReady:** Now actually works! ([fce0325](https://github.com/jimmorrison-coder/hooks/commit/fce032598c7b1fb76ba3b652e1e996934e2983c8))
+
 ## [2.0.0](https://github.com/Twipped/hooks/compare/v1.1.0...v2.0.0) (2024-05-28)
 
 
